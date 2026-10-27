@@ -1,0 +1,46 @@
+PAINEL DE DISTRIBUICAO DE CERVEJA - LUVI BI  (versao servidor)
+===============================================================
+
+O painel roda num servidor na VM (porta 8098) e le sozinho os arquivos
+mais recentes da pasta da Critica. Para atualizar, basta salvar o
+relatorio novo na pasta: nao precisa mexer no painel.
+
+
+INSTALACAO
+----------
+1) Descompacte esta pasta inteira na VM, num local fixo
+   (ex.: C:\Distribuicao Cerveja). Nao use pasta do F:.
+
+2) Libere a porta (Prompt de Comando como administrador):
+   netsh advfirewall firewall add rule name="Distribuicao Cerveja 8098" dir=in action=allow protocol=TCP localport=8098
+
+3) De dois cliques em "Iniciar Servidor.bat" e deixe a janela aberta.
+   Ela lista os arquivos encontrados e o endereco de acesso.
+
+4) Abra  http://IP-DA-VM:8098
+
+
+ARQUIVOS LIDOS (sempre o mais recente)
+--------------------------------------
+  F:\PUBLICO\33 - FECHAMENTO DIÁRIO\Crítica          03.02.37  e  01.20.11
+  F:\PUBLICO\33 - FECHAMENTO DIÁRIO\Crítica\Cestas   Cerveja.xlsx
+  F:\PUBLICO\33 - FECHAMENTO DIÁRIO\Crítica\Base Score 5   (opcionais, dois arquivos nesta pasta)
+      - Base Score 5          -> filtro Score 5 (High End / Core)
+      - 00. Planificador Boni IMC MDLZ  (nome com "Boni")
+                              -> aviso "Bonificação disponível" no fim de cada PDV
+        O PDV e identificado pela coluna UNB_PDV, ignorando o "636002_" da frente.
+        Tem bonificacao disponivel quando a coluna "Bonificacao" = Sim.
+        O produto (coluna "Nome Produto") aparece no detalhe do cliente.
+  Sem esses arquivos, o recurso correspondente simplesmente nao aparece.
+
+Linhas de venda com Status C ou D (cancelada/devolvida) sao descartadas.
+
+
+ARQUIVOS DO PACOTE
+------------------
+  index.html            o painel
+  servidor.py           o servidor
+  Iniciar Servidor.bat  liga o servidor (reinicia sozinho se cair)
+  LEIA-ME.txt           este guia
+
+Ajustes (porta, pastas) ficam no comeco do servidor.py.
